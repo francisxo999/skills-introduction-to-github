@@ -1,51 +1,133 @@
-# Introduction to GitHub
+# 🧾 Proyecto: Transformación Digital - Perfulandia SPA
 
-_Get started using GitHub in less than an hour._
+Este repositorio contiene el desarrollo técnico del sistema basado en microservicios para la empresa Perfulandia SPA, como parte de la Evaluación Parcial 2 de la asignatura Desarrollo Full Stack I.
 
-## Welcome
+## 📦 Descripción General del Proyecto
 
-People use GitHub to build some of the most advanced technologies in the world. Whether you’re visualizing data or building a new game, there’s a whole community and set of tools on GitHub that can help you do it even better. GitHub Skills’ “Introduction to GitHub” exercise guides you through everything you need to start contributing in less than an hour.
+Perfulandia SPA, una empresa chilena de perfumería con varias sucursales, enfrentaba problemas de rendimiento y escalabilidad con su antiguo sistema monolítico. El presente proyecto propone una solución basada en microservicios, permitiendo una mayor eficiencia, escalabilidad, tolerancia a fallos y facilidad de mantenimiento. Esta transformación digital mejora tanto la gestión interna como la experiencia del cliente final.
 
-- **Who is this for**: New developers, new GitHub users, and students.
-- **What you'll learn**: We'll introduce repositories, branches, commits, and pull requests.
-- **What you'll build**: We'll make a short Markdown file you can use as your [profile README](https://docs.github.com/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme).
-- **Prerequisites**: None. This exercise is a great introduction for your first day on GitHub.
-- **How long**: This exercise takes less than one hour to complete.
+## 🧩 Arquitectura de Microservicios
 
-In this exercise, you will:
+El sistema está estructurado en microservicios independientes, cada uno responsable de una funcionalidad específica. Estos servicios se comunican entre sí usando APIs REST, lo que permite escalar y desplegar cada módulo de forma aislada.
 
-1. Create a branch
-2. Commit a file
-3. Open a pull request
-4. Merge your pull request
+### Microservicios Desarrollados
 
-### How to start this exercise
+- `usuarioservice`: Gestiona usuarios, incluyendo creación, modificación, autenticación (login) y asignación de roles.
+- `productoservice`: Administra el inventario y catálogo de productos disponibles para venta.
+- `pedidoservice`: Maneja los pedidos de los clientes, desde su creación hasta la actualización de su estado.
+- `notificacionservice`: Encargado del envío de notificaciones como confirmaciones de pedido o alertas por correo.
+- `logisticaservice`: Se encarga de la gestión de envíos, planificación de rutas y seguimiento del estado de entrega de productos.
 
-1. Right-click **Copy Exercise** and open the link in a new tab.
+## 🛠️ Tecnologías Utilizadas
 
-   <a id="copy-exercise">
-      <img src="https://img.shields.io/badge/📠_Copy_Exercise-AAA" height="25pt"/>
-   </a>
+- Java 17
+- Spring Boot
+- Maven
+- MySQL
+- Postman
+- Docker
+- Kubernetes
+- GitHub + GitHub Actions
+- IntelliJ IDEA / Eclipse
 
-2. In the new tab, most of the prompts will automatically fill in for you.
-   - For owner, choose your personal account or an organization to host the repository.
-   - We recommend creating a public repository, as private repositories will [use Actions minutes](https://docs.github.chttps://github.com/francisxo999/skills-introduction-to-github/billing/managing-billing-for-github-actions/about-billing-for-github-actions).
-   - Scroll down and click the **Create repository** button at the bottom of the form.
+## 🗄️ Configuración de Bases de Datos
 
-3. After your new repository is created, wait about 20 seconds for the exercise to be prepared and buttons updated. You will continue working from your copy of the exercise.
-   - The **Copy Exercise** button will deactivate, changing to gray.
-   - The **Start Exercise** button will activate, changing to green.
-   - You will likely need to refresh the page.
+Se utilizó MySQL como sistema de gestión de bases de datos. Cada microservicio tiene su propia base de datos para lograr un bajo acoplamiento y mayor independencia.
 
-4. Click **Start Exercise**. Follow the step-by-step instructions and feedback will be provided as you progress.
+Ejemplo de configuración (application.properties):
 
-   <a id="start-exercise" href="https://github.com/francisxo999/skills-introduction-to-github/issues/1">
-      <img src="https://img.shields.io/badge/🚀_Start_Exercise-008000" height="25pt"/>
-   </a>
+spring.datasource.url=jdbc:mysql://localhost:3306/usuarios
+spring.datasource.username=root
+spring.datasource.password=1234
+spring.jpa.hibernate.ddl-auto=update
 
-> [!IMPORTANT]
-> The **Start Exercise** button will activate after copying the repository. You will probably need to refresh the page.
+Cada servicio define sus propias entidades. Por ejemplo:
 
----
+- usuarioservice: Tabla usuarios con campos id, nombre, correo, rol.
+- productoservice: Tabla productos con campos id, nombre, precio, stock.
+- pedidoservice: Tabla pedidos con id, usuarioId, productos, estado.
+- logisticaservice: Tabla envios con id, pedidoId, estado, direccion, fechaEntrega.
 
-&copy; 2025 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
+## 📮 Endpoints y Pruebas
+
+Cada microservicio implementa endpoints REST para operaciones CRUD. Ejemplos:
+
+### usuarioservice:
+- GET /usuarios
+- POST /usuarios
+- GET /usuarios/{id}
+- DELETE /usuarios/{id}
+
+### productoservice:
+- GET /productos
+- POST /productos
+- PUT /productos/{id}
+
+### pedidoservice:
+- GET /pedidos
+- POST /pedidos
+- PUT /pedidos/{id}/estado
+
+### logisticaservice:
+- GET /envios
+- POST /envios
+- PUT /envios/{id}/estado
+
+### Ejemplos de pruebas con Postman:
+1. Crear un nuevo usuario → POST /usuarios → Respuesta: 201 Created.
+2. Obtener todos los productos → GET /productos → Lista de productos en formato JSON.
+3. Crear un pedido y verificar llamada al servicio de productos para validar stock.
+4. Crear un envío para un pedido y actualizar su estado → PUT /envios/{id}/estado.
+
+## 🔁 CI/CD (Integración y Entrega Continua)
+
+Se utilizó GitHub Actions para automatizar los flujos de integración y despliegue:
+
+1. push al repositorio.
+2. Ejecución de pruebas automatizadas.
+3. Construcción de imagen Docker.
+4. Despliegue en contenedores gestionados con Kubernetes.
+
+## 🧑‍💻 Integrantes del Equipo
+
+| Nombre               | Rol en el proyecto         | Servicio principal trabajado |
+|----------------------|----------------------------|------------------------------|
+| Mayckol Mardones     | Backend - Usuarios         | usuarioservice               |
+| Carlos Moil          | Backend - Productos        | productoservice              |
+| Francisco Vera       | CI/CD y Backend - Logística| logisticaservice             |
+
+## 📂 Estructura del Repositorio
+
+📦 perfulandia-microservices
+├── usuarioservice
+│   └── src / pom.xml
+├── productoservice
+│   └── src / pom.xml
+├── pedidoservice
+│   └── src / pom.xml
+├── logisticaservice
+│   └── src / pom.xml
+├── notificacionservice
+│   └── src / pom.xml
+└── README.md
+
+Cada microservicio contiene su propio archivo pom.xml, configuración de base de datos, controladores REST, entidades y repositorios.
+
+## 👥 Colaboración en GitHub
+
+El equipo trabajó utilizando ramas específicas para cada microservicio:
+- main: rama estable.
+- develop: rama de desarrollo general.
+- usuarioservice, productoservice, pedidoservice, logisticaservice: ramas específicas por microservicio.
+
+Se realizaron commits frecuentes documentando avances, y se realizaron pull requests revisados antes de integrarse a develop y luego a main.
+
+## 📈 Lecciones Aprendidas
+
+Durante el desarrollo del proyecto aprendimos:
+
+- Cómo diseñar e implementar una arquitectura basada en microservicios desde cero.
+- Uso de herramientas modernas como Docker, Kubernetes y GitHub Actions para CI/CD.
+- La importancia del trabajo colaborativo y control de versiones en equipo.
+- Pruebas efectivas de endpoints RESTful con Postman.
+
