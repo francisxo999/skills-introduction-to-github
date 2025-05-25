@@ -12,104 +12,118 @@ El sistema está estructurado en microservicios independientes, cada uno respons
 
 ### Microservicios Desarrollados
 
-- `usuarioservice`: Gestiona usuarios, incluyendo creación, modificación, etc.
-- `productoservice`: Administra el inventario y catálogo de productos disponibles para venta.
-- `pedidoservice`: Maneja los pedidos de los clientes, desde su creación hasta la actualización de su estado.
-- `logisticaservice`: Se encarga de la gestión de envíos, planificación de rutas y seguimiento del estado de entrega de productos.
+- usuarioservice: Gestiona usuarios, incluyendo creación, modificación, autenticación y roles.
+- productoservice: Administra el inventario y catálogo de productos disponibles para la venta.
+- pedidoservice: Maneja los pedidos de los clientes, desde su creación hasta la actualización de su estado.
+- logisticaservice: Se encarga de la gestión de envíos, planificación de rutas y seguimiento del estado de entrega de productos.
+- carritoservice: Permite la gestión de carritos de compra por parte de los clientes.
 
 ## Tecnologías Utilizadas
 
 - Java 17
 - Spring Boot
-- Laragon (Base de Datos SQL)
+- Laragon (Base de Datos MySQL)
 - Postman
 - GitHub
 - IntelliJ IDEA
 
-## 🗄️Configuración de Bases de Datos
+## Configuración de Bases de Datos
 
 Se utilizó MySQL como sistema de gestión de bases de datos. Cada microservicio tiene su propia base de datos para lograr un bajo acoplamiento y mayor independencia.
 
 Cada servicio define sus propias entidades. Por ejemplo:
 
-- usuarioservice: Tabla usuarios con campos id, nombre, correo, etc.
-- productoservice: Tabla productos con campos id, nombre, precio, stock.
-- pedidoservice: Tabla pedidos con id, usuarioId, productos, estado.
-- logisticaservice: Tabla envios con id, pedidoId, estado, direccion, fechaEntrega.
+- usuarioservice: Tabla `usuarios` con campos como id, nombre, correo, rol, etc.
+- productoservice: Tabla `productos` con campos como id, nombre, precio, stock.
+- pedidoservice: Tabla `pedidos` con campos como id, usuarioId, productos, estado.
+- logisticaservice: Tabla `envios` con campos como id, pedidoId, estado, direccion, fechaEntrega.
+- carritoservice: Tabla `carritos` con campos como id, usuarioId, productos, total.
 
 ## Endpoints y Pruebas
 
 Cada microservicio implementa endpoints REST para operaciones CRUD. Ejemplos:
 
-### usuarioservice:
+usuarioservice:
 - GET /usuarios
 - POST /usuarios
 - GET /usuarios/{id}
 - DELETE /usuarios/{id}
 
-### productoservice:
+productoservice:
 - GET /productos
 - POST /productos
 - PUT /productos/{id}
 
-### pedidoservice:
+pedidoservice:
 - GET /pedidos
 - POST /pedidos
 - PUT /pedidos/{id}/estado
 
-### logisticaservice:
+logisticaservice:
 - GET /envios
 - POST /envios
 - PUT /envios/{id}/estado
 
+carritoservice:
+- GET /carrito
+- POST /carrito
+- PUT /carrito/{id}
+- DELETE /carrito/{id}
 
-## 🔁 CI/CD (Integración y Entrega Continua)
+## CI/CD (Integración y Entrega Continua)
 
 Se utilizó GitHub Actions para automatizar los flujos de integración y despliegue:
 
-1. push al repositorio.
+1. Push al repositorio.
 2. Ejecución de pruebas automatizadas.
-3. Conexión de los microservicios con un pull request.
-4. Prueba del proyecto en general.
+3. Conexión de los microservicios mediante pull requests.
+4. Prueba del sistema en su conjunto.
 
-## 🧑‍💻 Integrantes del Equipo
+## Integrantes del Equipo
 
-| Nombre               | Rol en el proyecto         | Servicio principal trabajado |
-|----------------------|----------------------------|------------------------------|
-| Carlos Moil          | Líder del equipo       | productoservice              |
-| Mayckol Mardones     | Encargado de Backend y Base de Datos       | usuarioservice               |
-| Francisco Vera       | Encargado de Backend y Base de Datos        | logisticaservice             |
+| Nombre              | Rol en el proyecto                     | Servicio principal trabajado |
+|---------------------|----------------------------------------|------------------------------|
+| Carlos Moil         | Líder del equipo                       | pedidoservice                |
+| Mayckol Mardones    | Encargado de Backend y Base de Datos   | carritoservice               |
+| Francisco Vera      | Encargado de Backend y Base de Datos   | logisticaservice             |
 
-## 📂 Estructura del Repositorio
+## Estructura del Repositorio
 
-📦 perfulandia-microservices
-├── usuarioservice
-│   └── src / pom.xml
-├── productoservice
-│   └── src / pom.xml
-├── pedidoservice
+perfulandia-microservices
+├── .idea
+├── carritoservice
 │   └── src / pom.xml
 ├── logisticaservice
 │   └── src / pom.xml
-├── notificacionservice
+├── pedidoservice
+│   └── src / pom.xml
+├── productservice
+│   └── src / pom.xml
+├── usuarioservice
 │   └── src / pom.xml
 └── README.md
 
-Cada microservicio contiene su propio archivo pom.xml, configuración de base de datos, controladores REST, entidades y repositorios.
+Cada microservicio contiene su propio archivo `pom.xml`, configuración de base de datos, controladores REST, entidades y repositorios.
 
-## 👥 Colaboración en GitHub
+## Colaboración en GitHub
 
-El equipo trabajó utilizando ramas específicas para cada microservicio:
-- master: rama principal.
-- ramas específicas por cada usuario: Esto es para que cada persona que trabaja en el repositorio trabajé de manera independiente, sin interrumpir al otro y así luego se une los microservicios creados.
+El equipo organizó el trabajo utilizando una rama principal (`master`) y ramas individuales por integrante:
 
-Se realizaron commits frecuentes documentando avances, y se realizaron pull requests revisados antes de integrarse a develop y luego a main.
+- `master`: rama principal del repositorio, donde se integran los microservicios completos y estables.
+- `carlos-moil`: rama de desarrollo del microservicio `pedidoservice`.
+- `francisco-vera`: rama de desarrollo del microservicio `logisticaservice`.
+- `mayckol-mardones`: rama de desarrollo del microservicio `carritoservice`.
 
-## 📈 Lecciones Aprendidas
+Cada integrante trabajó de forma independiente en su respectiva rama para evitar conflictos, lo cual permitió avanzar en paralelo sin afectar el desarrollo de otros módulos.
+
+Una vez completadas las funcionalidades, se realizaron pull requests desde cada rama hacia `master`. Estos fueron revisados y fusionados por el equipo, resolviendo conflictos si era necesario.
+
+Se realizaron commits frecuentes y descriptivos para mantener un historial de cambios claro y facilitar la integración.
+
+## Lecciones Aprendidas
 
 Durante el desarrollo del proyecto aprendimos:
 
 - Cómo diseñar e implementar una arquitectura basada en microservicios desde cero.
-- La importancia del trabajo colaborativo y control de versiones en equipo.
-- Pruebas efectivas de endpoints RESTful con Postman.
-
+- La importancia del trabajo colaborativo y el control de versiones en equipo.
+- Cómo realizar pruebas efectivas de endpoints RESTful utilizando Postman.
