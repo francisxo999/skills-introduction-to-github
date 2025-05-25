@@ -1,3 +1,4 @@
+
 # Proyecto: Transformación Digital - Perfulandia SPA
 
 Este repositorio contiene el desarrollo técnico del sistema basado en microservicios para la empresa Perfulandia SPA, como parte de la Evaluación Parcial 2 de la asignatura Desarrollo Full Stack I.
@@ -92,15 +93,20 @@ Se utilizó GitHub Actions para automatizar los flujos de integración y desplie
 perfulandia-microservices
 ├── .idea
 ├── carritoservice
-│   └── src / pom.xml
+│   └── src
+│       └── pom.xml
 ├── logisticaservice
-│   └── src / pom.xml
+│   └── src
+│       └── pom.xml
 ├── pedidoservice
-│   └── src / pom.xml
+│   └── src
+│       └── pom.xml
 ├── productservice
-│   └── src / pom.xml
+│   └── src
+│       └── pom.xml
 ├── usuarioservice
-│   └── src / pom.xml
+│   └── src
+│       └── pom.xml
 └── README.md
 
 Cada microservicio contiene su propio archivo `pom.xml`, configuración de base de datos, controladores REST, entidades y repositorios.
