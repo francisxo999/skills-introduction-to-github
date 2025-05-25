@@ -90,6 +90,9 @@ Se utilizó GitHub Actions para automatizar los flujos de integración y desplie
 
 ## Estructura del Repositorio
 
+Cada carpeta en el repositorio corresponde a un microservicio independiente, con su propia configuración (`pom.xml`), código fuente y base de datos específica. Esto permite un desarrollo modular y desacoplado entre servicios.
+
+```plaintext
 perfulandia-microservices
 ├── .idea
 ├── carritoservice
@@ -108,8 +111,7 @@ perfulandia-microservices
 │   └── src
 │       └── pom.xml
 └── README.md
-
-Cada microservicio contiene su propio archivo `pom.xml`, configuración de base de datos, controladores REST, entidades y repositorios.
+```
 
 ## Colaboración en GitHub
 
