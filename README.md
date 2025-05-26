@@ -16,7 +16,6 @@ El sistema está estructurado en microservicios independientes, cada uno respons
 - usuarioservice: Gestiona usuarios, incluyendo creación, modificación, autenticación y roles.
 - productoservice: Administra el inventario y catálogo de productos disponibles para la venta.
 - pedidoservice: Maneja los pedidos de los clientes, desde su creación hasta la actualización de su estado.
-- logisticaservice: Se encarga de la gestión de envíos, planificación de rutas y seguimiento del estado de entrega de productos.
 - carritoservice: Permite la gestión de carritos de compra por parte de los clientes.
 
 ## Tecnologías Utilizadas
@@ -37,7 +36,6 @@ Cada servicio define sus propias entidades. Por ejemplo:
 - usuarioservice: Tabla `usuarios` con campos como id, nombre, correo, rol, etc.
 - productoservice: Tabla `productos` con campos como id, nombre, precio, stock.
 - pedidoservice: Tabla `pedidos` con campos como id, usuarioId, productos, estado.
-- logisticaservice: Tabla `envios` con campos como id, pedidoId, estado, direccion, fechaEntrega.
 - carritoservice: Tabla `carritos` con campos como id, usuarioId, productos, total.
 
 ## Endpoints y Pruebas
@@ -73,7 +71,7 @@ carritoservice:
 
 ## CI/CD (Integración y Entrega Continua)
 
-Se utilizó GitHub Actions para automatizar los flujos de integración y despliegue:
+Se utilizó GitHub para automatizar los flujos de integración y despliegue:
 
 1. Push al repositorio.
 2. Ejecución de pruebas automatizadas.
@@ -96,9 +94,6 @@ Cada carpeta en el repositorio corresponde a un microservicio independiente, con
 perfulandia-microservices
 ├── .idea
 ├── carritoservice
-│   └── src
-│       └── pom.xml
-├── logisticaservice
 │   └── src
 │       └── pom.xml
 ├── pedidoservice
