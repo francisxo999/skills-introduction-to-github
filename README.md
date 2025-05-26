@@ -58,11 +58,6 @@ pedidoservice:
 - POST /pedidos
 - PUT /pedidos/{id}/estado
 
-logisticaservice:
-- GET /envios
-- POST /envios
-- PUT /envios/{id}/estado
-
 carritoservice:
 - GET /carrito
 - POST /carrito
@@ -71,7 +66,7 @@ carritoservice:
 
 ## CI/CD (Integración y Entrega Continua)
 
-Se utilizó GitHub para automatizar los flujos de integración y despliegue:
+Se utilizó GitHub Actions para automatizar los flujos de integración y despliegue:
 
 1. Push al repositorio.
 2. Ejecución de pruebas automatizadas.
@@ -80,15 +75,13 @@ Se utilizó GitHub para automatizar los flujos de integración y despliegue:
 
 ## Integrantes del Equipo
 
-| Nombre              | Rol en el proyecto                     | Servicio principal trabajado |
-|---------------------|----------------------------------------|------------------------------|
-| Carlos Moil         | Líder del equipo                       | pedidoservice                |
-| Mayckol Mardones    | Encargado de Backend y Base de Datos   | carritoservice               |
-| Francisco Vera      | Encargado de Backend y Base de Datos   | logisticaservice             |
+| Nombre              | Rol en el proyecto                     | Servicio principal trabajado         |
+|---------------------|----------------------------------------|--------------------------------------|
+| Carlos Moil         | Líder del equipo                       | pedidoservice                        |
+| Mayckol Mardones    | Encargado de Backend y Base de Datos   | carritoservice                       |
+| Francisco Vera      | Backend y edición de documentación     | logisticaservice (eliminado)         |
 
 ## Estructura del Repositorio
-
-Cada carpeta en el repositorio corresponde a un microservicio independiente, con su propia configuración (`pom.xml`), código fuente y base de datos específica. Esto permite un desarrollo modular y desacoplado entre servicios.
 
 ```plaintext
 perfulandia-microservices
@@ -108,13 +101,15 @@ perfulandia-microservices
 └── README.md
 ```
 
+Cada microservicio contiene su propio archivo `pom.xml`, configuración de base de datos, controladores REST, entidades y repositorios.
+
 ## Colaboración en GitHub
 
 El equipo organizó el trabajo utilizando una rama principal (`master`) y ramas individuales por integrante:
 
 - `master`: rama principal del repositorio, donde se integran los microservicios completos y estables.
 - `carlos-moil`: rama de desarrollo del microservicio `pedidoservice`.
-- `francisco-vera`: rama de desarrollo del microservicio `logisticaservice`.
+- `francisco-vera`: rama de desarrollo del microservicio `logisticaservice` (luego eliminado).
 - `mayckol-mardones`: rama de desarrollo del microservicio `carritoservice`.
 
 Cada integrante trabajó de forma independiente en su respectiva rama para evitar conflictos, lo cual permitió avanzar en paralelo sin afectar el desarrollo de otros módulos.
