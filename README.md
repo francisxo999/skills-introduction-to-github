@@ -100,6 +100,7 @@ Se utilizó GitHub Actions para automatizar los flujos de integración y desplie
 
 ## Estructura del Repositorio
 
+```plaintext
 perfulandia-microservices
 ├── .idea
 ├── carritoservice
@@ -115,6 +116,7 @@ perfulandia-microservices
 │   └── src
 │       └── pom.xml
 └── README.md
+```
 
 Cada microservicio contiene su propio archivo `pom.xml`, configuración de base de datos, controladores REST, entidades y repositorios.
 
