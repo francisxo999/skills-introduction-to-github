@@ -13,4 +13,4 @@ Se sigue la metodología Scrum, con sprints semanales para organizar el trabajo 
 ## Diseño de interfaces
 
 - **Figma:**  
-  [Prototipos de diseño](https://www.figma.com/proto/dW6zv0OQ8aZEJCwbGtbomC/Vettsafe?node-id=15-115&starting-point-node-id=15%3A115) 
+  [Prototipo de diseño](https://www.figma.com/proto/dW6zv0OQ8aZEJCwbGtbomC/Vettsafe?node-id=15-115&starting-point-node-id=15%3A115) 
